@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Consultation Record</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page-bg">
+    <main class="document">
+      <header class="letterhead">
+        <div class="letterhead-title">
+          <h1>Consultation Record</h1>
+          <p>Live dictation and structured clinical summary.</p>
+        </div>
+        <span class="letterhead-ref">LOCAL SESSION</span>
+      </header>
+
+      <div class="meta-row" aria-label="Session details">
+        <span>STATUS <span class="status-value"><span class="status-dot" id="statusDot"></span><span id="statusLabel">idle</span></span></span>
+        <span>ELAPSED <span id="sessionClock">00:00</span></span>
+        <span>WORDS <span id="wordCount">0</span></span>
+        <span>UTTERANCES <span id="chunkCount">0</span></span>
+      </div>
+
+      <div class="body-grid">
+        <section class="col col-log" aria-labelledby="dictationHeading">
+          <h2 id="dictationHeading">Dictation log</h2>
+          <div class="transport">
+            <button id="startBtn" class="form-btn form-btn-start">[ Start microphone ]</button>
+            <button id="stopBtn" class="form-btn form-btn-stop" disabled>[ Stop recording ]</button>
+          </div>
+          <button id="clearBtn" class="form-btn form-btn-ghost">[ Clear transcript ]</button>
+
+          <div class="feed-scroll" id="feedScroll" aria-live="polite">
+            <p class="feed-placeholder" id="feedPlaceholder">
+              Ready for dictation. Press Start microphone and speak naturally.<br />
+              Detected speech will be transcribed after each pause.
+            </p>
+          </div>
+
+          <button id="analyzeBtn" class="form-btn form-btn-analyze" disabled>[ Process transcript with Gemini ]</button>
+        </section>
+
+        <section class="col" aria-labelledby="recordHeading">
+          <div class="record-head">
+            <h2 id="recordHeading">Clinical record</h2>
+            <button id="clearRecordBtn" class="form-btn form-btn-tiny">[ Clear record ]</button>
+          </div>
+
+          <div class="record-sheet" id="recordSheet">
+            <div class="record-row patient-row" id="patientRow">
+              <span class="patient-name">No patient identified yet</span>
+              <span class="patient-meta" id="patientMeta"></span>
+            </div>
+            <div class="record-section"><h3><span class="tick"></span>Chief complaint</h3><p class="record-empty" data-field="chief_complaint">Not yet extracted</p></div>
+            <div class="record-section"><h3><span class="tick"></span>History of present illness</h3><p class="record-empty" data-field="hpi">Not yet extracted</p></div>
+            <div class="record-section two-col">
+              <div><h3><span class="tick"></span>Symptoms reported</h3><ul class="record-list" data-field="symptoms_positive"><li class="record-empty">Not yet extracted</li></ul></div>
+              <div><h3><span class="tick"></span>Symptoms denied</h3><ul class="record-list" data-field="symptoms_negative"><li class="record-empty">Not yet extracted</li></ul></div>
+            </div>
+            <div class="record-section"><h3><span class="tick"></span>Past medical history</h3><ul class="record-list" data-field="past_history"><li class="record-empty">Not yet extracted</li></ul></div>
+            <div class="record-section two-col">
+              <div><h3><span class="tick"></span>Medications</h3><ul class="record-list" data-field="medications"><li class="record-empty">Not yet extracted</li></ul></div>
+              <div><h3><span class="tick"></span>Allergies</h3><ul class="record-list" data-field="allergies"><li class="record-empty">Not yet extracted</li></ul></div>
+            </div>
+            <div class="record-section"><h3><span class="tick"></span>Clinical observations</h3><ul class="record-list" data-field="observations"><li class="record-empty">Not yet extracted</li></ul></div>
+            <div class="record-section"><h3><span class="tick"></span>Assessment</h3><ul class="record-list" data-field="assessment"><li class="record-empty">Not yet extracted</li></ul></div>
+            <div class="record-section"><h3><span class="tick"></span>Plan</h3><ul class="record-list" data-field="plan"><li class="record-empty">Not yet extracted</li></ul></div>
+            <div class="record-section"><h3><span class="tick"></span>Narrative summary</h3><p class="record-empty" data-field="narrative">Not yet extracted</p></div>
+          </div>
+
+          <button id="copyBtn" class="form-btn form-btn-ink" disabled>[ Copy record as text ]</button>
+        </section>
+      </div>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
